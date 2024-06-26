@@ -1,53 +1,16 @@
 import 'package:flutter/material.dart';
 
-enum TabItem {home, workout, progress}
 
-const Map<TabItem, String> tabName = {
-  TabItem.home: 'Home',
-  TabItem.workout: "Workout Tracker",
-  TabItem.progress: "Progress Tracker",
-};
+// List<Widget> pageList = [
+//   const WorkoutScreen(),
+//   const StatScreen(),
+//   const Profile(), 
+// ];
+
+
 void main(){
   runApp( const MyApp());
 }
-
-
-class BottomNavigation extends StatelessWidget {
-  BottomNavigation({required this.currentTab, required this.onSelectTab});
-  final TabItem currentTab;
-  final ValueChanged<TabItem> onSelectTab;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-
-      type: BottomNavigationBarType.fixed,
-
-      items: [
-        _buildItem(TabItem.home),
-        _buildItem(TabItem.workout),
-        _buildItem(TabItem.progress),
-      ],
-
-      onTap: (index) => onSelectTab(
-        TabItem.values[index],
-      ),
-
-    );
-  }
-
-  BottomNavigationBarItem _buildItem(TabItem tabItem){
-    
-    return BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-    );
-
-  }
-
-}
-
-
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -56,45 +19,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
-  Widget _buildBody(){
-  return Container(
-
-    alignment: Alignment.center,
-    child: FloatingActionButton(
-      child: Text('PUSH'),
-      onPressed: _push,
-    ),
-
-  );
-}
-
-void _push() {
-  Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) =>
-    )
-  );
-}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(),
-      bottomNavigationBar: BottomNavigation(
-        currentTab: _currentTab,
-        onSelectTab: _selectTab,
-      ),
+    return MaterialApp(
+      home: const BaseApp(),
+      routes: <String, WidgetBuilder> {
+        '/WorkoutScreen' : (context) => const WorkoutScreen(),
+        '/StatScreen' : (context) => const StatScreen(),
+        '/ProfileScreen' : (context) => const ProfileScreen(),
+      }
     );
+  }
+}
+class BaseApp extends StatelessWidget {
+  const BaseApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
 
     //Used as root of application, configure themes / routes
-    /*return MaterialApp(
-
-      //home property, scaffold is a screen
-      home: Scaffold(
-        body: _buildBody(),
-        //move around a widget
-        
-        
-
+    return Scaffold(
         appBar: AppBar(
 
           
@@ -104,7 +48,7 @@ void _push() {
           title: const Text('Rizzy bear'),
         ),
 
-      /*body: Container(
+      body: Container(
           
           margin: const EdgeInsets.all(100),
           padding: const EdgeInsets.all(10),
@@ -118,30 +62,86 @@ void _push() {
           ),*/
 
           child: const Text('Floating'),
-        ),*/
-        /*bottomNavigationBar: BottomNavigationBar(
+        ),
+        
+        bottomNavigationBar: BottomNavigationBar(
+              
+
               items: const [
+          
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
-                  label: 'Home',
+                  label: 'Workouts',
                   
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.line_weight),
-                  label: 'Workouts',
+                  label: 'Statistics',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.masks),
-                  label: 'Other',
+                  label: 'Profile',
                 ),
 
               ],
-        )*/
+              onTap: (value) {
+                if (value == 0) Navigator.pushNamed(context, '/WorkoutScreen');
+                if (value == 1) Navigator.pushNamed(context, '/StatScreen');
+                if (value == 2) Navigator.pushNamed(context, '/ProfileScreen');
+              },
+        )
          
         
-      ),
-      
-    );*/
+      );
   
+  }
+
+}
+
+class WorkoutScreen extends StatelessWidget {
+  const WorkoutScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+
+          backgroundColor: Colors.red,
+          title: const Text('Welcome to Workouts!'),
+        ),
+
+    );
+  }
+}
+
+class StatScreen extends StatelessWidget {
+  const StatScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+
+          backgroundColor: Colors.green,
+          title: const Text('Welcome to Stats!'),
+        ),
+
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+
+          backgroundColor: Colors.blue,
+          title: const Text('Welcome to Profile!'),
+        ),
+
+    );
   }
 }

@@ -83,8 +83,32 @@ class BaseApp extends StatelessWidget {
         
       );*/
 
-     return MaterialApp(
+    return const MaterialApp(
       home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          bottomNavigationBar: TabBar(
+            tabs: [
+                Tab(
+                  text: 'Workouts',
+                  icon: Icon(Icons.home),
+                ),
+                
+                Tab(
+                  text: 'Statistics',
+                  icon: Icon(Icons.bar_chart),
+                ),
+                
+                Tab(
+                  text: 'Profile',
+                  icon: Icon(Icons.face),
+                ),
+            ],
+            
+          ),
+        ),
+      ),
+      /*home: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
@@ -116,7 +140,7 @@ class BaseApp extends StatelessWidget {
           ),
 
         ),
-      ),
+      ),*/
     );
   
   }

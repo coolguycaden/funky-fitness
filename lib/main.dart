@@ -40,7 +40,7 @@ class BaseApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //Used as root of application, configure themes / routes
-    return Scaffold(
+    /*return Scaffold(
       appBar: AppBar(
 
         
@@ -81,7 +81,43 @@ class BaseApp extends StatelessWidget {
       )
          
         
-      );
+      );*/
+
+     return MaterialApp(
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Tab(
+                  icon: Icon(Icons.home),
+                ),
+                
+                Tab(
+                  icon: Icon(Icons.bar_chart),
+                ),
+                
+                Tab(
+                  icon: Icon(Icons.face),
+                ),
+              ],
+            ),
+
+            
+          ),
+
+          body: const TabBarView(
+            children: [
+              Icon(Icons.home),
+              Icon(Icons.bar_chart),
+              Icon(Icons.face),
+            ],
+          ),
+
+        ),
+      ),
+    );
   
   }
 

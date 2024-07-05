@@ -43,15 +43,27 @@ class BaseApp extends StatelessWidget {
               Column(
                 children: [
                   AppBar(
-                    title: const Text('Workouts'),
+                    toolbarHeight: 80,
+                    title: Container(
+                      margin: const EdgeInsets.only(top: 20, left: 8),
+                      child: const Text(
+                        'Workout View',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                        
+                      ),
+                    ),
                   ),
+
                   Row (
                     children: [
-                      TextButton(
-                        child: const Text('A workout'),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/WorkoutScreen');
-                        },
+                      Container(
+                        margin: const EdgeInsets.only(top: 8, left: 8),
+                        child: TextButton(
+                          child: const Text('A workout'),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/WorkoutScreen');
+                          },
+                        ),
                       ),
                     ],
                   ),

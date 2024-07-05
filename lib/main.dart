@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 
-// List<Widget> pageList = [
-//   const WorkoutScreen(),
-//   const StatScreen(),
-//   const Profile(), 
-// ];
-
-
 void main(){
   runApp( const MyApp());
 }
@@ -32,24 +25,9 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-class BaseApp extends StatelessWidget {//with SingleTickerProviderStateMixin {
+class BaseApp extends StatelessWidget {
   const BaseApp({super.key});
 
-  //int _currentIndex = 0;
-  /*late TabController tabController;
-  @override
-
-  void initState(){
-    tabController = TabController(length: 3, vsync: this);
-    tabController.addListener(() {
-      setState(() {
-        
-      });
-    });
-
-    super.initState();
-  }
-*/
   @override
   Widget build(BuildContext context) {
 
@@ -58,39 +36,29 @@ class BaseApp extends StatelessWidget {//with SingleTickerProviderStateMixin {
         length: 3,
         
         child: Scaffold(
-          bottomNavigationBar: homeRowBar(context),
+          bottomNavigationBar: homeRowBar(),
           
-          /*appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                  Tab(
-                    text: 'Workouts',
-                    icon: Icon(Icons.fitness_center),
-                  ),
-                  
-                  Tab(
-                    text: 'Statistics',
-                    icon: Icon(Icons.bar_chart),
-                  ),
-                  
-                  Tab(
-                    text: 'Profile',
-                    icon: Icon(Icons.face),
-                    
-                  ),
-              ],
-            ),
-          ),*/
-          
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
+              Column(
+                children: [
+                  AppBar(
+                    title: const Text('Workouts'),
+                  ),
+                  Row (
+                    children: [
+                      TextButton(
+                        child: const Text('A workout'),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/WorkoutScreen');
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
-
-          
         ),
         
       ),
@@ -99,9 +67,13 @@ class BaseApp extends StatelessWidget {//with SingleTickerProviderStateMixin {
   
   }
 
-  TabBar homeRowBar(BuildContext context) {
-    return TabBar(
-      tabs: const [
+
+  /*
+  This is the extracted method of the homeRow
+  */
+  TabBar homeRowBar() {
+    return const TabBar(
+      tabs: [
           Tab(
             text: 'Workouts',
             icon: Icon(Icons.fitness_center),
@@ -120,12 +92,12 @@ class BaseApp extends StatelessWidget {//with SingleTickerProviderStateMixin {
       ],
 
       
-      onTap: (value) {
-        if (value == 0) print('User clicked 1!');//Navigator.pushNamed(context, '/WorkoutScreen'); 
-        if (value == 1) print('User clicked 1!');//Navigator.pushNamed(context, '/StatScreen');
-        if (value == 2) print('User clicked 1!');//Navigator.pushNamed(context, '/ProfileScreen');
+      /*onTap: (value) {
+        if (value == 0) Navigator.pushNamed(context, '/WorkoutScreen'); 
+        if (value == 1) Navigator.pushNamed(context, '/StatScreen');
+        if (value == 2) Navigator.pushNamed(context, '/ProfileScreen');
   
-      },
+      },*/
           
     );
   }
@@ -142,7 +114,7 @@ class WorkoutScreen extends StatelessWidget {
 
           backgroundColor: Colors.red,
           title: const Text('Welcome to Workouts!'),
-        ),
+      ),
 
     );
   }

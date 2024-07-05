@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BaseApp(),
+      home: const BaseApp(),
       routes: <String, WidgetBuilder> {
 
         '/WorkoutScreen' : (context) => const WorkoutScreen(),
@@ -58,43 +58,76 @@ class BaseApp extends StatelessWidget {//with SingleTickerProviderStateMixin {
         length: 3,
         
         child: Scaffold(
-          bottomNavigationBar: TabBar(
+          bottomNavigationBar: homeRowBar(context),
           
-          //c: _currentIndex,
-            tabs: const [
-                Tab(
-                  text: 'Workouts',
-                  icon: Icon(Icons.fitness_center),
-                ),
-                
-                Tab(
-                  text: 'Statistics',
-                  icon: Icon(Icons.bar_chart),
-                ),
-                
-                Tab(
-                  text: 'Profile',
-                  icon: Icon(Icons.face),
+          /*appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                  Tab(
+                    text: 'Workouts',
+                    icon: Icon(Icons.fitness_center),
+                  ),
                   
-                ),
+                  Tab(
+                    text: 'Statistics',
+                    icon: Icon(Icons.bar_chart),
+                  ),
+                  
+                  Tab(
+                    text: 'Profile',
+                    icon: Icon(Icons.face),
+                    
+                  ),
+              ],
+            ),
+          ),*/
+          
+          body: const TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
             ],
-
-  
-            /*onTap: (value) {
-              if (value == 0) Navigator.pushNamed(context, '/WorkoutScreen');
-              if (value == 1) Navigator.pushNamed(context, '/StatScreen');
-              if (value == 2) Navigator.pushNamed(context, '/ProfileScreen');
-        
-            },*/
-            
           ),
+
           
         ),
-
+        
       ),
     
     );
   
+  }
+
+  TabBar homeRowBar(BuildContext context) {
+    return TabBar(
+      tabs: const [
+          Tab(
+            text: 'Workouts',
+            icon: Icon(Icons.fitness_center),
+          ),
+          
+          Tab(
+            text: 'Statistics',
+            icon: Icon(Icons.bar_chart),
+          ),
+          
+          Tab(
+            text: 'Profile',
+            icon: Icon(Icons.face),
+            
+          ),
+      ],
+
+      
+      onTap: (value) {
+        if (value == 0) print('User clicked 1!');//Navigator.pushNamed(context, '/WorkoutScreen'); 
+        if (value == 1) print('User clicked 1!');//Navigator.pushNamed(context, '/StatScreen');
+        if (value == 2) print('User clicked 1!');//Navigator.pushNamed(context, '/ProfileScreen');
+  
+      },
+          
+    );
   }
 
 }

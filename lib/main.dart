@@ -32,6 +32,10 @@ class BaseApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.dark,
       home: DefaultTabController(
         length: 3,
         
@@ -44,25 +48,44 @@ class BaseApp extends StatelessWidget {
                 children: [
                   AppBar(
                     toolbarHeight: 80,
-                    title: Container(
-                      margin: const EdgeInsets.only(top: 20, left: 8),
-                      child: const Text(
-                        'Workout View',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-                        
+                    title: Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 20, left: 2,),
+                          decoration: bottomWorkoutBorder(),
+                          child: const Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            
+                            child: Text(
+                              'Workouts',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
 
                   Row (
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 8, left: 8),
-                        child: TextButton(
-                          child: const Text('A workout'),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/WorkoutScreen');
-                          },
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/WorkoutScreen');
+                        },
+                        
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 20,),
+                          decoration: bottomWorkoutBorder(),
+                          child: const Padding(
+                            padding: EdgeInsets.only(bottom: 20, top: 16, right: 30),
+                            child: Text(
+                              'A workout',
+                              style: TextStyle(
+                                fontSize: 18
+                              ), 
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -83,9 +106,16 @@ class BaseApp extends StatelessWidget {
   /*
   This is the extracted method of the homeRow
   */
-  TabBar homeRowBar() {
-    return const TabBar(
-      tabs: [
+  Container homeRowBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        border: BorderDirectional(
+          top: BorderSide(width: 1, color: Colors.black),
+        ),
+      ),
+
+      child: const TabBar(
+        tabs: [
           Tab(
             text: 'Workouts',
             icon: Icon(Icons.fitness_center),
@@ -101,18 +131,19 @@ class BaseApp extends StatelessWidget {
             icon: Icon(Icons.face),
             
           ),
-      ],
-
-      
-      /*onTap: (value) {
-        if (value == 0) Navigator.pushNamed(context, '/WorkoutScreen'); 
-        if (value == 1) Navigator.pushNamed(context, '/StatScreen');
-        if (value == 2) Navigator.pushNamed(context, '/ProfileScreen');
-  
-      },*/
-          
+        ],
+      ),
     );
   }
+
+  BoxDecoration bottomWorkoutBorder() {
+    return const BoxDecoration(
+      border: BorderDirectional(
+        bottom: BorderSide(width: 1, color: Colors.grey),
+      ),
+    );           
+  }
+
 
 }
 

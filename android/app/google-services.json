@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "545129720327",
+    "project_id": "funky-fitness",
+    "storage_bucket": "funky-fitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545129720327:android:2acdbe7bcf8e1f1d6e18a2",
+        "android_client_info": {
+          "package_name": "com.funkyfitness.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnHC_wXsUPj_NsJU-Y3B54yDTQVyQTBH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

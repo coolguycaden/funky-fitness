@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"funky-fitness","configurations":{"android":"1:545129720327:android:2acdbe7bcf8e1f1d6e18a2","web":"1:545129720327:web:274d21a3c0a0e3406e18a2"}}},"android":{"default":{"projectId":"funky-fitness","appId":"1:545129720327:android:2acdbe7bcf8e1f1d6e18a2","fileOutput":"android/app/google-services.json"}}}}}

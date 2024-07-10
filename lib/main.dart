@@ -10,6 +10,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(ProviderScope(child: MyApp()));
+  //runApp(const MyApp());
 }
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

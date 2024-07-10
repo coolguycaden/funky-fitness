@@ -1,3 +1,3 @@
-# fittness_app
+# Funky Fitness
 
 A new Flutter project.

@@ -1,7 +1,13 @@
+//import necessary packages
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:funkyfitness/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+//import screens
+import 'package:funkyfitness/features/auth/pages/login_page.dart';
+
 
 
 void main() async {
@@ -9,10 +15,37 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(ProviderScope(child: MyApp()));
-  //runApp(const MyApp());
 }
-class MyApp extends StatefulWidget {
+
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
+  @override 
+  Widget build(BuildContext context, WidgetRef ref){
+    return MaterialApp(
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(), 
+        builder: (context, snapshot) {
+          if (!snapshot.hasData){
+            return LoginPage();
+          }
+
+          return Container();
+        }
+      ),
+    );
+  }
+}
+
+
+/*class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
@@ -24,11 +57,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: BaseApp(),
   
     );
   }
-}
+}*/
+
+
 class BaseApp extends StatelessWidget {
   const BaseApp({super.key});
 
@@ -63,6 +99,13 @@ class BaseApp extends StatelessWidget {
   }
 
 
+  /*
+    Precondition
+
+
+    Postcondition  
+
+  */
   
   Container homeRowBar() {
     return Container(

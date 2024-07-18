@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '545129720327',
     projectId: 'funky-fitness',
     storageBucket: 'funky-fitness.appspot.com',
-    iosBundleId: 'com.example.fittnessApp',
+    iosBundleId: 'com.example.funkyfitness',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -65,7 +65,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '545129720327',
     projectId: 'funky-fitness',
     storageBucket: 'funky-fitness.appspot.com',
-    iosBundleId: 'com.example.fittnessApp',
+    iosBundleId: 'com.example.funkyfitness',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

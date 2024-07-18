@@ -1,6 +1,6 @@
 {
-    "name": "fittness_app",
-    "short_name": "fittness_app",
+    "name": "funkyfitness",
+    "short_name": "funkyfitness",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

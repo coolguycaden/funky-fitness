@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import necessary decorations
 import 'package:funkyfitness/cores/decorations/bottom_workout_border.dart';
+import 'package:funkyfitness/cores/screens/workout_view.dart';
 
 class WorkoutBar extends StatefulWidget {
   const WorkoutBar({super.key});
@@ -42,17 +43,22 @@ class _WorkoutBarState extends State<WorkoutBar> {
           ),
         ),
         onTap: () {
-          //Navigator.pushNamed(context, '/WorkoutScreen');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WorkoutView()
+            ),
+          );
         },
       ),
     );
   }
 
 
-  @override
+  /*@override
   void initState(){
 
-  }
+  }*/
 
   
 }

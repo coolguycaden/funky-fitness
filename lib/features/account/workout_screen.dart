@@ -22,7 +22,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   //Make this take user data as initial value
   int _count = 1;
 
+  //before
+  //Color lightPurple = Color.fromARGB(255, 199, 129, 211);
 
+  Color lightPurple = Color.fromARGB(255, 206, 139, 218);
+  
   @override
   Widget build(BuildContext context) {
 
@@ -43,8 +47,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                   child: Text(
                     'Edit',
                     style: TextStyle(
-                      fontSize: 23,
-                      color: Colors.lightBlue,
+                      fontSize: 18,
+                      color: lightPurple,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -60,7 +64,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               IconButton(
                 icon: Icon(
                   FontAwesomeIcons.plus,
-                  color: Colors.lightBlue,
+                  color: lightPurple,
                 ),
                 onPressed: () {
                   _addNewWorkoutView();
@@ -76,7 +80,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
           bottom: false, 
 
           child: Container(
-            margin: const EdgeInsets.only(top: 15, left: 7,),
+            margin: const EdgeInsets.only(top: 3, left: 7,),
             decoration: bottomWorkoutBorder(),
             child: Row(
               children: [
@@ -86,7 +90,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                     
                     child: Text(
                       'Workouts',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                   ),
                 ),

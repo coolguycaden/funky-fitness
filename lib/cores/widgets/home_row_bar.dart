@@ -4,8 +4,9 @@ import "package:flutter/material.dart";
 Container homeRowBar() {
     return Container(
       decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 43, 43, 43),
         border: BorderDirectional(
-          top: BorderSide(width: 1, color: Colors.black),
+          top: BorderSide(width: 1, color: Color.fromARGB(255, 95, 95, 95)),
         ),
       ),
 

@@ -22,19 +22,17 @@ class UserDataService {
 
 
   addUserDataToFirestore({
-    required String username,
     required String email,
     required List workouts,
     required String userId,
-    required String type, 
+    //required String type, 
   }) async {
     UserModel user = UserModel(
-      username: username, 
       email: email, 
       workouts: [], 
       workoutNum: 0, 
       userId: auth.currentUser!.uid, 
-      type: "user",
+      //type: "user",
     );
 
     //Add data from user to database

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import necessary decorations
-import 'package:funkyfitness/cores/decorations/bottom_workout_border.dart';
+import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 
 //import necessary widgets
 import 'package:funkyfitness/cores/widgets/workout_bar.dart';
@@ -20,7 +20,7 @@ class WorkoutScreen extends StatefulWidget {
 class _WorkoutScreenState extends State<WorkoutScreen> {
   
   //Make this take user data as initial value
-  int _count = 1;
+  int _workoutCount = 1;
 
   //before
   //Color lightPurple = Color.fromARGB(255, 199, 129, 211);
@@ -32,7 +32,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
     //This holds number of workouts user has created 
     List<Widget> _workouts = 
-      new List.generate(_count, (int i) => new WorkoutBar());
+      new List.generate(_workoutCount, (int i) => new WorkoutBar());
 
     return Column(
       children: [
@@ -81,7 +81,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
           child: Container(
             margin: const EdgeInsets.only(top: 3, left: 7,),
-            decoration: bottomWorkoutBorder(),
+            decoration: bottomBoxBorder(),
             child: Row(
               children: [
                 Container(
@@ -112,7 +112,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   void _addNewWorkoutView() {
     setState(() {
       //Add ability to update user data in database
-      _count = _count + 1;
+      _workoutCount = _workoutCount + 1;
     });
   }
 

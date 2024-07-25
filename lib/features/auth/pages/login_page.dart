@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 //Imported to use the authServiceProvider method
-//
 import "package:funkyfitness/features/auth/repository/auth_service.dart";
 
 class LoginPage extends ConsumerWidget {

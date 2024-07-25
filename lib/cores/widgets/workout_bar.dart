@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import necessary decorations
-import 'package:funkyfitness/cores/decorations/bottom_workout_border.dart';
+import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 import 'package:funkyfitness/cores/screens/workout_view.dart';
 
 class WorkoutBar extends StatefulWidget {
@@ -23,13 +23,13 @@ class _WorkoutBarState extends State<WorkoutBar> {
       child: GestureDetector(
         child: new Container(
           margin: new EdgeInsets.only(left: 7,),
-          decoration: bottomWorkoutBorder(),
+          decoration: bottomBoxBorder(),
           child: new Row(
             children: [
               new Padding(
                 padding: new EdgeInsets.only(bottom: 20, top: 16, right: 30),
                 child: new Text(
-                  'A workout',
+                  'Unnamed Workout',
                   style: TextStyle(
                     fontSize: 18
                   ), 
@@ -42,6 +42,7 @@ class _WorkoutBarState extends State<WorkoutBar> {
             ],
           ),
         ),
+
         onTap: () {
           Navigator.push(
             context,
@@ -53,12 +54,5 @@ class _WorkoutBarState extends State<WorkoutBar> {
       ),
     );
   }
-
-
-  /*@override
-  void initState(){
-
-  }*/
-
   
 }

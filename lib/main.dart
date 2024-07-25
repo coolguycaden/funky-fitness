@@ -1,6 +1,8 @@
 //import necessary packages
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:funkyfitness/features/auth/repository/user_data_service.dart';
 import 'package:funkyfitness/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,9 +10,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import screens
 import 'package:funkyfitness/features/auth/pages/login_page.dart';
 import 'cores/screens/home_screen.dart';
-import 'package:funkyfitness/features/auth/pages/username_page.dart';
 
-
+//import necessary widgets
+import 'package:funkyfitness/cores/widgets/loader.dart';
 
 void main() async {
 
@@ -44,11 +46,38 @@ class MyApp extends ConsumerWidget {
 
           //If user is not signed it, get them to sign in
           if (!snapshot.hasData){
+
             return LoginPage();
+          } else if(snapshot.connectionState == ConnectionState.waiting){
+            return Loader();
+          
           }
 
-          return HomeScreen();
-        },
+          return StreamBuilder(
+            stream: FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .snapshots(),
+
+            builder: (context, snapshot) {
+              final user = FirebaseAuth.instance.currentUser;
+              if(!snapshot.hasData || !snapshot.data!.exists){
+                ref
+                  .read(userDataServiceProvider)
+                  .addUserDataToFirestore(
+                    email: user!.email!,
+                    workouts: ["Upper Body, Chest Press, 3, 10,", "Lower Body, Leg Press, 3, 10"],
+                    userId: user.uid,
+                  );
+                return HomeScreen();
+              } else if (snapshot.connectionState == ConnectionState.waiting){
+                return Loader();
+              }
+
+              return HomeScreen();
+            },
+          );
+        }
       ),
     );
   }

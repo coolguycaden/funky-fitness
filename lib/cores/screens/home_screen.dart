@@ -1,5 +1,6 @@
 //import necessary packages
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //import necessary widgets
 import 'package:funkyfitness/cores/widgets/home_row_bar.dart';

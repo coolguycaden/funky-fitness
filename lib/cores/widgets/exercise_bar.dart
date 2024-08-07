@@ -6,6 +6,22 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 
 
+/*
+  final String exceriseName;
+  final int exerciseSets;
+  final int exerciseReps; 
+  final String exerciseNotes;
+
+  WorkoutView({
+    super.key,
+    required this.exceriseName,
+    required this.exerciseSets,
+    required this.exerciseReps,
+    required this.exerciseNotes,
+
+  });
+  */
+
 class ExerciseBar extends StatefulWidget {
   const ExerciseBar({super.key});
 
@@ -14,6 +30,8 @@ class ExerciseBar extends StatefulWidget {
 }
 
 class _ExerciseBarState extends State<ExerciseBar> {
+  late String _exerciseName; 
+  //late String _exerciseSetReps;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +49,7 @@ class _ExerciseBarState extends State<ExerciseBar> {
                   new Padding(
                     padding: new EdgeInsets.only(bottom: 20, top: 16, right: 30),
                     child: new Text(
-                      'An exercise',
+                      _exerciseName,
                       style: TextStyle(
                         fontSize: 18
                       ), 
@@ -46,8 +64,7 @@ class _ExerciseBarState extends State<ExerciseBar> {
 
               Row(
                 children: [
-                  
-                  //data from the exercise
+
                 ],
               )
             ],

@@ -7,10 +7,18 @@ import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 import 'package:funkyfitness/cores/screens/workout_view.dart';
 
 class WorkoutBar extends StatefulWidget {
-  const WorkoutBar({super.key});
+  final String currentWorkout;
+  final String currentExercises;
+
+  WorkoutBar({
+    Key? key,
+    required this.currentWorkout,
+    required this.currentExercises,
+  }): super(key: key);
+  
 
   @override
-  State<WorkoutBar> createState() => _WorkoutBarState();
+  _WorkoutBarState createState() => new _WorkoutBarState();
 }
 
 class _WorkoutBarState extends State<WorkoutBar> {
@@ -29,7 +37,7 @@ class _WorkoutBarState extends State<WorkoutBar> {
               new Padding(
                 padding: new EdgeInsets.only(bottom: 20, top: 16, right: 30),
                 child: new Text(
-                  'Unnamed Workout',
+                  widget.currentWorkout,
                   style: TextStyle(
                     fontSize: 18
                   ), 
@@ -47,7 +55,7 @@ class _WorkoutBarState extends State<WorkoutBar> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => WorkoutView()
+              builder: (context) => WorkoutView(),
             ),
           );
         },

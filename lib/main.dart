@@ -62,11 +62,14 @@ class MyApp extends ConsumerWidget {
             builder: (context, snapshot) {
               final user = FirebaseAuth.instance.currentUser;
               if(!snapshot.hasData || !snapshot.data!.exists){
+                
+                //add generic data if user does not exist or user data not in firebase
                 ref
                   .read(userDataServiceProvider)
                   .addUserDataToFirestore(
                     email: user!.email!,
-                    workouts: ["Upper Body, Chest Press, 3, 10,", "Lower Body, Leg Press, 3, 10"],
+                    workouts: ["Upper Body, Chest Press, 3, 10, Empty", "Lower Body, Leg Press, 3, 10, Empty"],
+                    workoutNum: 2,
                     userId: user.uid,
                   );
                 return HomeScreen();

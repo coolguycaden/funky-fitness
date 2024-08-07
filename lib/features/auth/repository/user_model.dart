@@ -12,8 +12,8 @@ class UserModel {
   //JSON serialization from here to end of class
   UserModel({
     required this.email,
-    required this.workoutNum,
     required this.workouts,
+    required this.workoutNum,
     required this.userId,
     //required this.type,
   });
@@ -31,7 +31,7 @@ class UserModel {
     return UserModel(
       email: map['email'] as String,
       workouts: List<String>.from(
-        map['subscriptions'] ?? [],
+        map['workouts'] ?? [],
       ),
       workoutNum: map['workoutNum'] as int,
       userId: map['userId'] as String,

@@ -7,7 +7,10 @@ import 'package:funkyfitness/cores/widgets/exercise_bar.dart';
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 
 class WorkoutView extends StatefulWidget {
-  WorkoutView({super.key});
+
+  WorkoutView({
+    Key? key,
+  }): super(key: key);
 
   
 
@@ -23,7 +26,7 @@ class _WorkoutViewState extends State<WorkoutView> {
 
   @override
   Widget build(BuildContext context) {
-
+    _setExerciseData();
     Color lightPurple = Color.fromARGB(255, 206, 139, 218);
 
     
@@ -97,5 +100,9 @@ class _WorkoutViewState extends State<WorkoutView> {
         ],
       ),
     );
+  }
+
+  void _setExerciseData() {
+
   }
 }

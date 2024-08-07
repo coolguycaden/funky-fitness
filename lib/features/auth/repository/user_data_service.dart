@@ -24,15 +24,16 @@ class UserDataService {
   addUserDataToFirestore({
     required String email,
     required List workouts,
+    required int workoutNum,
     required String userId,
-    //required String type, 
+
   }) async {
     UserModel user = UserModel(
       email: email, 
-      workouts: [], 
-      workoutNum: 0, 
+      workouts: ["Upper Body, Chest Press, 3, 10,", "Lower Body, Leg Press, 3, 10"], 
+      workoutNum: 2, 
       userId: auth.currentUser!.uid, 
-      //type: "user",
+      
     );
 
     //Add data from user to database
@@ -40,5 +41,14 @@ class UserDataService {
       .collection("users")
       .doc(auth.currentUser!.uid)
       .set(user.toMap());
+  }
+
+  Future<UserModel> fetchUserData() async {
+    final userMap = 
+      await firestore.collection("users").doc(auth.currentUser!.uid).get();
+
+    UserModel user = UserModel.fromMap(userMap.data()!);
+
+    return user;
   }
 }

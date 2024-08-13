@@ -24,14 +24,12 @@ class UserDataService {
   addUserDataToFirestore({
     required String email,
     required List workouts,
-    required int workoutNum,
     required String userId,
 
   }) async {
     UserModel user = UserModel(
       email: email, 
-      workouts: ["Upper Body, Chest Press, 3, 10,", "Lower Body, Leg Press, 3, 10"], 
-      workoutNum: 2, 
+      workouts: workouts, 
       userId: auth.currentUser!.uid, 
       
     );
@@ -43,6 +41,29 @@ class UserDataService {
       .set(user.toMap());
   }
 
+  updateUserDataInFirestore({
+    required UserModel user,
+    required List workouts,
+
+  }) async {
+
+    //Creates updated data map
+    Map<String, dynamic> updatedData = {
+      'email': user.email,
+      'workouts': workouts,
+      'userId': user.userId,
+    };
+
+    //Creates user info to be uploaded
+    UserModel updatedUser = UserModel.fromMap(updatedData);
+
+    //Uploads new data from user to database
+    await firestore
+      .collection("users")
+      .doc(auth.currentUser!.uid)
+      .set(user.toMap());
+  }
+  
   Future<UserModel> fetchUserData() async {
     final userMap = 
       await firestore.collection("users").doc(auth.currentUser!.uid).get();

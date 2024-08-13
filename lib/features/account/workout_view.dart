@@ -7,12 +7,16 @@ import 'package:funkyfitness/cores/widgets/exercise_bar.dart';
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 
 class WorkoutView extends StatefulWidget {
+  final String workoutName;
+  final List exerciseList;
 
   WorkoutView({
     Key? key,
+    required this.workoutName,
+    required this.exerciseList,
   }): super(key: key);
 
-  
+
 
   @override
   State<WorkoutView> createState() => new _WorkoutViewState();
@@ -23,16 +27,44 @@ class _WorkoutViewState extends State<WorkoutView> {
   //This holds number of exercises in a workout user has created 
   int _exerciseCount = 1;
 
+  //Index holds location of last comma, used to split exerciseList into
+  //individual exercises
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
-    _setExerciseData();
     Color lightPurple = Color.fromARGB(255, 206, 139, 218);
 
     
-    List<Widget> _exercises = 
-      new List.generate(_exerciseCount, (int i) => new ExerciseBar());
+    List<Widget> _exercises = []; /*= 
+      new List.generate(
+        _exerciseCount, (int i) => new ExerciseBar(
+          exerciseName: widget.exerciseList
+            .substring(_index, 
+              (_index += widget.exerciseList
+              .substring(_index)
+              .indexOf(',')
+              )
+            ),
+            //.substring(_index, (_index += widget.exerciseList.indexOf(','))),
 
+          setsAndReps: widget.exerciseList
+            .substring(_index, 
+              (_index += widget.exerciseList
+              .substring(_index)
+              .indexOf(',')
+              )
+            ),
+
+          exerciseNotes: widget.exerciseList
+            .substring(_index, 
+              (_index += widget.exerciseList
+              .substring(_index)
+              .indexOf(',')
+              )
+            ),
+        ));*/
+      debugPrint();
     return new Scaffold(
       body: Column(
         children: [
@@ -77,12 +109,12 @@ class _WorkoutViewState extends State<WorkoutView> {
               child: Row(
                 children: [
                   Container(
-                    child: const Padding(
-                      padding: EdgeInsets.only(bottom: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
                       
                       child: Text(
-                        'Workouts',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                        widget.workoutName,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                       ),
                     ),
                   ),
@@ -102,7 +134,7 @@ class _WorkoutViewState extends State<WorkoutView> {
     );
   }
 
-  void _setExerciseData() {
-
+  void debugPrint(){
+    print(_index);
   }
 }

@@ -30,8 +30,7 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
   final user = FirebaseAuth.instance.currentUser;
 
   int _workoutCount = 0;
-  List _allUserWorkouts =[];
-  
+  List _allUserWorkouts = [];
   //before
   //Color lightPurple = Color.fromARGB(255, 199, 129, 211);
 
@@ -39,18 +38,15 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
   
   @override
   Widget build(BuildContext context) {
-    _getUserData();
-    
     //This holds number of workouts user has created 
     List<Widget> _workouts = 
       new List.generate(
-        _workoutCount ?? 1, (int i) => 
-          new WorkoutBar(
+        _allUserWorkouts.length, (int i) => new WorkoutBar(
             //Splits the workout name from _allUserWorkouts
             currentWorkout: _allUserWorkouts[i].substring(0, _allUserWorkouts[i].indexOf(',')),
 
             //Splits the exercises from a workout from _allUserWorkouts
-            currentExercises: _allUserWorkouts[i].substring(_allUserWorkouts[i].indexOf(',')),
+            currentExercises: _allUserWorkouts[i].substring(_allUserWorkouts[i].indexOf(',') + 2),
           )
         );
 
@@ -143,15 +139,8 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
   @override
   void initState() {
     super.initState();
+    _getUserData();
   }
-
-  /*void _addNewWorkoutView() {
-    setState(() {
-      print("Count was: $_workoutCount");
-      _workoutCount = _workoutCount + 1;
-      print("Count is now: $_workoutCount\n\n\n\n\n");
-    });
-  }*/
   
   void _getUserData() {
     setState(() {
@@ -159,7 +148,6 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
         .read(userProvider)
         .when(
           data: (currentUser) {
-            _workoutCount = currentUser.workoutNum;
             _allUserWorkouts = currentUser.workouts;
           }, 
           error: (_, __) { 
@@ -176,33 +164,26 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
     );
    
    
-    print("\n\n1 Count is: $_workoutCount\n\n");
     print("\n\n$_allUserWorkouts\n\n");
-
   
   }
 
   void _addNewWorkoutBar() {
-    setState(() {
-      print("Count was: $_workoutCount");
-      _workoutCount = _workoutCount + 1;
-      print("Count is now: $_workoutCount\n\n\n\n\n");
-      _allUserWorkouts.add("Unnamed Workout, Placeholder Exercise, 3, 12, Empty");
-      _updateUserData();
-    });
+    _allUserWorkouts.add("Unnamed Workout, Placeholder Exercise, 3, 12, Add notes here!,");
+    _updateUserData();
   }
 
   void _updateUserData() {
     ref
       .read(userDataServiceProvider)
-      .addUserDataToFirestore(
-        email: user!.email!,
+      .updateUserDataInFirestore(
+        user: ref.read(userProvider).value!,
         workouts: _allUserWorkouts, 
-        workoutNum: _workoutCount, 
-        userId: user!.uid,
       );
-
+    
     print("\n\nUPDATED DATA\n\n");
+    _getUserData();
+    setState(() {});
   }
 
 }

@@ -4,25 +4,19 @@ import 'dart:convert';
 class UserModel {
   final String email;
   final List workouts;
-  final int workoutNum;
   final String userId;
-  //final String type;
-
 
   //JSON serialization from here to end of class
   UserModel({
     required this.email,
     required this.workouts,
-    required this.workoutNum,
     required this.userId,
-    //required this.type,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'email': email,
       'workouts': workouts,
-      'workoutNum': workoutNum,
       'userId': userId,
     };
   }
@@ -33,7 +27,6 @@ class UserModel {
       workouts: List<String>.from(
         map['workouts'] ?? [],
       ),
-      workoutNum: map['workoutNum'] as int,
       userId: map['userId'] as String,
       //type: map['type'] as String,
     );

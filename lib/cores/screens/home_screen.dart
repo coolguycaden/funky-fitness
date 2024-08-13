@@ -6,9 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:funkyfitness/cores/widgets/home_row_bar.dart';
 
 //import necessary screens
-import 'package:funkyfitness/features/account/profile_screen.dart';
-import 'package:funkyfitness/features/account/stat_screen.dart';
-import 'package:funkyfitness/features/account/workout_screen.dart';
+import 'package:funkyfitness/cores/screens/profile_screen.dart';
+import 'package:funkyfitness/cores/screens/stat_screen.dart';
+import 'package:funkyfitness/cores/screens/workout_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

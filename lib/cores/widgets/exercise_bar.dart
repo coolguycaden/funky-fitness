@@ -5,33 +5,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import necessary decorations
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 
-
-/*
-  final String exceriseName;
-  final int exerciseSets;
-  final int exerciseReps; 
+class ExerciseBar extends StatefulWidget {
+  final String exerciseName;
+  final String setsAndReps;
   final String exerciseNotes;
 
-  WorkoutView({
-    super.key,
-    required this.exceriseName,
-    required this.exerciseSets,
-    required this.exerciseReps,
+  ExerciseBar({
+    Key? key,
+    required this.exerciseName,
+    required this.setsAndReps,
     required this.exerciseNotes,
-
-  });
-  */
-
-class ExerciseBar extends StatefulWidget {
-  const ExerciseBar({super.key});
+  }): super (key: key);
 
   @override
   State<ExerciseBar> createState() => _ExerciseBarState();
 }
 
 class _ExerciseBarState extends State<ExerciseBar> {
-  late String _exerciseName; 
-  //late String _exerciseSetReps;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +39,7 @@ class _ExerciseBarState extends State<ExerciseBar> {
                   new Padding(
                     padding: new EdgeInsets.only(bottom: 20, top: 16, right: 30),
                     child: new Text(
-                      _exerciseName,
+                      widget.exerciseName,
                       style: TextStyle(
                         fontSize: 18
                       ), 
@@ -72,10 +62,14 @@ class _ExerciseBarState extends State<ExerciseBar> {
         ),
 
         onTap: () {
-          
+          debugPrint();
         },
       ),
     );
   }
-  
+  void debugPrint() {
+    print("\n\n" + widget.exerciseName);
+    print("\n\n" + widget.setsAndReps);
+    print("\n\n" + widget.exerciseNotes);
+  }
 }

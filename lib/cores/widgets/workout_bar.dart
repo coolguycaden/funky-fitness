@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import necessary decorations
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
-import 'package:funkyfitness/cores/screens/workout_view.dart';
+import 'package:funkyfitness/features/account/workout_view.dart';
 
 class WorkoutBar extends StatefulWidget {
   final String currentWorkout;
@@ -25,6 +25,7 @@ class _WorkoutBarState extends State<WorkoutBar> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(); 
     return new SafeArea(
       top: false,
 
@@ -55,7 +56,10 @@ class _WorkoutBarState extends State<WorkoutBar> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => WorkoutView(),
+              builder: (context) => WorkoutView(
+                workoutName: widget.currentWorkout,
+                exerciseList: widget.currentExercises.split(','),
+              )
             ),
           );
         },
@@ -63,4 +67,8 @@ class _WorkoutBarState extends State<WorkoutBar> {
     );
   }
   
+  void debugPrint() {
+    print("\n\n");
+    print(widget.currentExercises.split(','));
+  }
 }

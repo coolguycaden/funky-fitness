@@ -64,14 +64,15 @@ class MyApp extends ConsumerWidget {
               if(!snapshot.hasData || !snapshot.data!.exists){
                 
                 //add generic data if user does not exist or user data not in firebase
-                ref
+                /*ref
                   .read(userDataServiceProvider)
                   .addUserDataToFirestore(
                     email: user!.email!,
-                    workouts: ["Upper Body, Chest Press, 3, 10, Empty", "Lower Body, Leg Press, 3, 10, Empty"],
-                    workoutNum: 2,
+                    workouts: ["Upper Body, Chest Press, 3, 10, Add notes here!,", "Lower Body, Leg Press, 3, 10, Add notes here!,"],
                     userId: user.uid,
                   );
+                */
+                print("\n\nnew user joined\n\n");
                 return HomeScreen();
               } else if (snapshot.connectionState == ConnectionState.waiting){
                 return Loader();

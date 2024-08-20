@@ -1,6 +1,5 @@
 //import necessary packages
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import necessary decorations
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
@@ -9,45 +8,48 @@ import 'package:funkyfitness/features/account/workout_view.dart';
 class WorkoutBar extends StatefulWidget {
   final String currentWorkout;
   final String currentExercises;
+  final Icon currentIcon;
 
-  WorkoutBar({
-    Key? key,
+  const WorkoutBar({
+    super.key,
     required this.currentWorkout,
     required this.currentExercises,
-  }): super(key: key);
+    required this.currentIcon,
+  });
   
 
   @override
-  _WorkoutBarState createState() => new _WorkoutBarState();
+  _WorkoutBarState createState() => _WorkoutBarState();
 }
 
 class _WorkoutBarState extends State<WorkoutBar> {
+  Color lightPurple = const Color.fromARGB(255, 206, 139, 218);
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(); 
-    return new SafeArea(
+    //debugPrint(); 
+    return SafeArea(
       top: false,
 
       child: GestureDetector(
-        child: new Container(
-          margin: new EdgeInsets.only(left: 7,),
+        child: Container(
+          margin: const EdgeInsets.only(left: 7,),
           decoration: bottomBoxBorder(),
-          child: new Row(
+          child: Row(
             children: [
-              new Padding(
-                padding: new EdgeInsets.only(bottom: 20, top: 16, right: 30),
-                child: new Text(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20, top: 16, right: 30),
+                child: Text(
                   widget.currentWorkout,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18
                   ), 
                 ),
               ),
 
-              new Spacer(),
+              const Spacer(),
 
-              new Icon(FontAwesomeIcons.angleRight, size: 20),
+              widget.currentIcon,
             ],
           ),
         ),

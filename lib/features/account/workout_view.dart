@@ -7,65 +7,48 @@ import 'package:funkyfitness/cores/widgets/exercise_bar.dart';
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
 
 class WorkoutView extends StatefulWidget {
+  //final VoidCallback nameChanged;
   final String workoutName;
   final List exerciseList;
 
-  WorkoutView({
-    Key? key,
+  const WorkoutView({
+    super.key,
     required this.workoutName,
     required this.exerciseList,
-  }): super(key: key);
+    //required this.nameChanged,
+  });
 
 
 
   @override
-  State<WorkoutView> createState() => new _WorkoutViewState();
+  State<WorkoutView> createState() => _WorkoutViewState();
 }
 
 class _WorkoutViewState extends State<WorkoutView> {
 
   //This holds number of exercises in a workout user has created 
-  int _exerciseCount = 1;
+  final int _exerciseCount = 1;
 
   //Index holds location of last comma, used to split exerciseList into
   //individual exercises
-  int _index = 0;
+  final int _index = 0;
 
   @override
   Widget build(BuildContext context) {
-    Color lightPurple = Color.fromARGB(255, 206, 139, 218);
+    Color lightPurple = const Color.fromARGB(255, 206, 139, 218);
 
     
-    List<Widget> _exercises = []; /*= 
-      new List.generate(
-        _exerciseCount, (int i) => new ExerciseBar(
-          exerciseName: widget.exerciseList
-            .substring(_index, 
-              (_index += widget.exerciseList
-              .substring(_index)
-              .indexOf(',')
-              )
-            ),
-            //.substring(_index, (_index += widget.exerciseList.indexOf(','))),
+    List<Widget> exercises = List.generate(
+      _exerciseCount, (int i) => ExerciseBar(
+        exerciseName: widget.exerciseList[i * 4], 
+        setsAndReps: widget.exerciseList[(i * 4) + 1] + widget.exerciseList[(i * 4) + 2], 
+        exerciseNotes: widget.exerciseList[(i * 4) + 3],
+      )
+    );
 
-          setsAndReps: widget.exerciseList
-            .substring(_index, 
-              (_index += widget.exerciseList
-              .substring(_index)
-              .indexOf(',')
-              )
-            ),
+    //debugPrint();
 
-          exerciseNotes: widget.exerciseList
-            .substring(_index, 
-              (_index += widget.exerciseList
-              .substring(_index)
-              .indexOf(',')
-              )
-            ),
-        ));*/
-      debugPrint();
-    return new Scaffold(
+    return Scaffold(
       body: Column(
         children: [
           SafeArea(
@@ -74,7 +57,7 @@ class _WorkoutViewState extends State<WorkoutView> {
               children: [
                 GestureDetector(
                   child: Container(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       children: [
                         Icon(
@@ -114,20 +97,37 @@ class _WorkoutViewState extends State<WorkoutView> {
                       
                       child: Text(
                         widget.workoutName,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold, 
+                          fontSize: 30
+                        ),
                       ),
                     ),
                   ),
 
-                  Spacer(),
+                  const Spacer(),
                   
+                  
+                  GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Icon(
+                        FontAwesomeIcons.ellipsis,
+                        color: lightPurple,
+                      ),
+                    ),
+
+                    onTap: () {
+                      
+                    },
+                  ),
                 ],
               ),
             ),
           ),
 
           Column(
-            children: _exercises,
+            children: exercises,
           ),
         ],
       ),

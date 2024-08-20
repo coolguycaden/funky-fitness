@@ -4,18 +4,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import necessary decorations
 import 'package:funkyfitness/cores/decorations/bottom_box_border.dart';
+import 'package:funkyfitness/features/account/exercise_view.dart';
 
 class ExerciseBar extends StatefulWidget {
   final String exerciseName;
   final String setsAndReps;
   final String exerciseNotes;
 
-  ExerciseBar({
-    Key? key,
+  const ExerciseBar({
+    super.key,
     required this.exerciseName,
     required this.setsAndReps,
     required this.exerciseNotes,
-  }): super (key: key);
+  });
 
   @override
   State<ExerciseBar> createState() => _ExerciseBarState();
@@ -25,51 +26,81 @@ class _ExerciseBarState extends State<ExerciseBar> {
 
   @override
   Widget build(BuildContext context) {
-    return new SafeArea(
+    Color lightPurple = const Color.fromARGB(255, 206, 139, 218);
+
+    return SafeArea(
       top: false,
 
       child: GestureDetector(
-        child: new Container(
-          margin: new EdgeInsets.only(left: 7,),
+        child: Container(
+          margin: const EdgeInsets.only(left: 7,),
           decoration: bottomBoxBorder(),
-          child: new Column(
+          child: Column(
             children: [
-              Row(
+              Column(
                 children: [
-                  new Padding(
-                    padding: new EdgeInsets.only(bottom: 20, top: 16, right: 30),
-                    child: new Text(
-                      widget.exerciseName,
-                      style: TextStyle(
-                        fontSize: 18
-                      ), 
-                    ),
-                  ),
-                  
-                  new Spacer(),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, right: 30),
+                        child: Text(
+                          widget.exerciseName.trimLeft(),
+                          style: const TextStyle(
+                            fontSize: 21,
+                          ), 
+                        ),
+                      ),
+                      
+                      const Spacer(),
 
-                  new Icon(FontAwesomeIcons.ellipsis, size: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30, right: 10),
+                        child: Icon(
+                          FontAwesomeIcons.angleRight, 
+                          size: 20,
+                          color: lightPurple,
+                        ),
+                      )
+                    ],
+                  ),
+
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20,),
+                        child: Text(
+                          "${widget.setsAndReps.trimLeft().substring(0, 1)} sets",
+                          style: const TextStyle(
+                            fontSize: 17,
+                          ), 
+                        ),
+                      ),
+
+                      const Spacer(),
+                    ]
+                  ),
                 ],
               ),
-
-              Row(
-                children: [
-
-                ],
-              )
             ],
           ),
         ),
 
-        onTap: () {
-          debugPrint();
+
+        onTap: () async {
+          await showDialog<void>(
+            context: context, 
+            builder: (context) => const AlertDialog(
+              content: ExerciseView(),
+            ),
+          );
+          //debugPrint();
         },
       ),
     );
   }
   void debugPrint() {
-    print("\n\n" + widget.exerciseName);
-    print("\n\n" + widget.setsAndReps);
-    print("\n\n" + widget.exerciseNotes);
+    //print("\n\n" + widget.exerciseName);
+    //print("\n\n" + widget.setsAndReps);
+    //print("\n\n" + widget.exerciseNotes);
   }
 }

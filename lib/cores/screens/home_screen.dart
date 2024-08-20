@@ -1,6 +1,5 @@
 //import necessary packages
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //import necessary widgets
 import 'package:funkyfitness/cores/widgets/home_row_bar.dart';
@@ -8,11 +7,16 @@ import 'package:funkyfitness/cores/widgets/home_row_bar.dart';
 //import necessary screens
 import 'package:funkyfitness/cores/screens/profile_screen.dart';
 import 'package:funkyfitness/cores/screens/stat_screen.dart';
-import 'package:funkyfitness/cores/screens/workout_screen.dart';
+import 'package:funkyfitness/cores/screens/all_workouts_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
@@ -30,9 +34,9 @@ class HomeScreen extends StatelessWidget {
         child: Scaffold(
           bottomNavigationBar: homeRowBar(),
           
-          body: TabBarView(
+          body: const TabBarView(
             children: [
-              WorkoutScreen(),
+              all_workouts_screen(),
               StatView(),
               ProfileView(),
             ],

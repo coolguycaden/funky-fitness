@@ -13,42 +13,39 @@ import 'package:funkyfitness/cores/widgets/workout_bar.dart';
 import 'package:funkyfitness/cores/widgets/loader.dart';
 
 //import error page
-import 'package:funkyfitness/features/auth/pages/error_page.dart';
 
 //import user data provider
 import 'package:funkyfitness/features/auth/provider/user_provider.dart';
 import 'package:funkyfitness/features/auth/repository/user_data_service.dart';
 
-class WorkoutScreen extends ConsumerStatefulWidget {
-  const WorkoutScreen({super.key});
+class all_workouts_screen extends ConsumerStatefulWidget {
+  const all_workouts_screen({super.key});
 
   @override
-  ConsumerState<WorkoutScreen> createState() => new _WorkoutScreenState();
+  ConsumerState<all_workouts_screen> createState() => _all_workouts_screenState();
 }
 
-class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
+class _all_workouts_screenState extends ConsumerState<all_workouts_screen> {
   final user = FirebaseAuth.instance.currentUser;
 
-  int _workoutCount = 0;
+  final int _workoutCount = 0;
   List _allUserWorkouts = [];
-  //before
-  //Color lightPurple = Color.fromARGB(255, 199, 129, 211);
 
-  Color lightPurple = Color.fromARGB(255, 206, 139, 218);
+  Color lightPurple = const Color.fromARGB(255, 206, 139, 218);
   
   @override
   Widget build(BuildContext context) {
-    //This holds number of workouts user has created 
-    List<Widget> _workouts = 
-      new List.generate(
-        _allUserWorkouts.length, (int i) => new WorkoutBar(
-            //Splits the workout name from _allUserWorkouts
-            currentWorkout: _allUserWorkouts[i].substring(0, _allUserWorkouts[i].indexOf(',')),
+  
+  
 
-            //Splits the exercises from a workout from _allUserWorkouts
-            currentExercises: _allUserWorkouts[i].substring(_allUserWorkouts[i].indexOf(',') + 2),
-          )
-        );
+    //This holds number of workouts user has created 
+    var currentIcon = Icon(
+    FontAwesomeIcons.angleRight,
+      size: 20,
+      color: lightPurple,
+    );
+
+    List<Widget> workouts = _generateWorkouts(currentIcon);
 
     return Column(
       children: [
@@ -59,7 +56,7 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
             children: [
               GestureDetector(
                 child: Container(
-                  padding: EdgeInsets.only(left: 7),
+                  padding: const EdgeInsets.only(left: 7),
                   child: Text(
                     'Edit',
                     style: TextStyle(
@@ -71,11 +68,18 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
                 ),
 
                 onTap: () {
-                  
+                  setState(() {
+                    currentIcon = Icon(
+                      FontAwesomeIcons.bars,
+                      size: 20,
+                      color: lightPurple,
+                    );
+                    workouts = _generateWorkouts(currentIcon);
+                  });
                 },
               ),
 
-              Spacer(),
+              const Spacer(),
 
               IconButton(
                 icon: Icon(
@@ -111,7 +115,7 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
                   ),
                 ),
 
-                Spacer(),
+                const Spacer(),
                 
               ],
             ),
@@ -123,7 +127,7 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
               return ref.watch(userProvider).when(
               data: (currentUser) => Column(
 
-                children: _workouts,
+                children: workouts,
                   
               ), 
               error: (error, stackTrace) => Container(), 
@@ -164,7 +168,7 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
     );
    
    
-    print("\n\n$_allUserWorkouts\n\n");
+    //print("\n\n$_allUserWorkouts\n\n");
   
   }
 
@@ -181,9 +185,23 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
         workouts: _allUserWorkouts, 
       );
     
-    print("\n\nUPDATED DATA\n\n");
+    //print("\n\nUPDATED DATA\n\n");
     _getUserData();
     setState(() {});
   }
 
+  List<Widget> _generateWorkouts(Icon currentIcon){
+
+    return List.generate(
+      _allUserWorkouts.length, (int i) => WorkoutBar(
+        //Splits the workout name from _allUserWorkouts
+        currentWorkout: _allUserWorkouts[i].substring(0, _allUserWorkouts[i].indexOf(',')),
+
+        //Splits the exercises from a workout from _allUserWorkouts
+        currentExercises: _allUserWorkouts[i].substring(_allUserWorkouts[i].indexOf(',') + 2),
+
+        currentIcon: currentIcon,
+    )
+    );
+  }
 }

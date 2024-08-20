@@ -6,12 +6,12 @@ class ErrorPage extends StatelessWidget {
   const ErrorPage({
     required Key key,
     required this.errorDetails,
-  }) : assert(errorDetails != null), super(key: key);
+  }) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       color: Colors.red,
       child: Padding(
         padding: EdgeInsets.all(5),

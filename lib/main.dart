@@ -2,7 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:funkyfitness/features/auth/repository/user_data_service.dart';
 import 'package:funkyfitness/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +21,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -47,9 +46,9 @@ class MyApp extends ConsumerWidget {
           //If user is not signed it, get them to sign in
           if (!snapshot.hasData){
 
-            return LoginPage();
+            return const LoginPage();
           } else if(snapshot.connectionState == ConnectionState.waiting){
-            return Loader();
+            return const Loader();
           
           }
 
@@ -64,6 +63,7 @@ class MyApp extends ConsumerWidget {
               if(!snapshot.hasData || !snapshot.data!.exists){
                 
                 //add generic data if user does not exist or user data not in firebase
+
                 /*ref
                   .read(userDataServiceProvider)
                   .addUserDataToFirestore(
@@ -72,13 +72,14 @@ class MyApp extends ConsumerWidget {
                     userId: user.uid,
                   );
                 */
-                print("\n\nnew user joined\n\n");
-                return HomeScreen();
+                
+                //print("\n\nnew user joined\n\n");
+                return const HomeScreen();
               } else if (snapshot.connectionState == ConnectionState.waiting){
-                return Loader();
+                return const Loader();
               }
 
-              return HomeScreen();
+              return const HomeScreen();
             },
           );
         }
